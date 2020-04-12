@@ -21,22 +21,22 @@ namespace RafSessions
             InitializeComponent();
             program = new List<string>{
                                 "Get Ready.  Starting in 1 minute from now",
-                                "Single Leg Box						",
-                                "one and half Bottomed Out Squats   ",
-                                "Jump Squats                        ",
-                                "Handstand Pushups                  ",
-                                "Rotational Pushups                 ",
-                                "Cobra Pushups                      ",
-                                "Single Leg Heel Touch Squats       ",
-                                "Sprinter Lunges                    ",
-                                "Jump Sprinter Lunges               ",
-                                "Pullups OR Push ups                ",
-                                "Body weight Sliding Pulldowns      ",
-                                "Inverted Chin Curls or Push ups    ",
-                                "Reverse Corkscrews                 ",
-                                "Black Widow Knee Slides            ",
-                                "Levitation Crunches                ",
-                                "Angels and Devils                  "
+                                "Single Leg Box						"
+                                //"one and half Bottomed Out Squats   ",
+                                //"Jump Squats                        ",
+                                //"Handstand Pushups                  ",
+                                //"Rotational Pushups                 ",
+                                //"Cobra Pushups                      ",
+                                //"Single Leg Heel Touch Squats       ",
+                                //"Sprinter Lunges                    ",
+                                //"Jump Sprinter Lunges               ",
+                                //"Pullups OR Push ups                ",
+                                //"Body weight Sliding Pulldowns      ",
+                                //"Inverted Chin Curls or Push ups    ",
+                                //"Reverse Corkscrews                 ",
+                                //"Black Widow Knee Slides            ",
+                                //"Levitation Crunches                ",
+                                //"Angels and Devils                  "
               };
             //set the initial value of nextitem to be the first entry of the program
             this.speech = new SpeechSynthesizer();
@@ -73,6 +73,10 @@ namespace RafSessions
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            //display the time count down
+            lblTimer.Text = string.Format("{0} : {1} : {2}", h.ToString().PadLeft(2, '0'), m.ToString().PadLeft(2, '0'), s.ToString().PadLeft(2, '0'));
+            lblMinCountDown.Text = s60.ToString();
+
             //setting the time increase
             if (s == 60)
             {
@@ -87,24 +91,28 @@ namespace RafSessions
             //s60 ticks down from 60 every minute
             if (s60 == 0)
             {
+                if(itemNumber == program.Count)  //check if it has finished the program
+                {
+                    speech.SpeakAsync("The end.  Well done!");
+                    timer1.Stop(); //stop the timer
+                    return;
+                }
                 speech.SpeakAsync("NOW " + program[itemNumber]); //announces "NOW" instead of 0
                 s60 = 60;
             }
             //every minute when it reaches 10, it reads out the next line
-            if(s60 == 10)
+            else if(s60 == 10)
             {
                 itemNumber++;  //because each exercise is 60sec no break; move to next exercise every minute
-                speech.SpeakAsync("in 10 seconds: " + program[itemNumber]);
-                //nextItem = txtProgram.Text.Substring();
-                //speech.SpeakAsync();
+                if (itemNumber < program.Count) //only announces next exercise if there is more exercise items to go
+                {
+                    speech.SpeakAsync("in 10 seconds: " + program[itemNumber]);
+                }
             }
-            if(s60 <= 5 && s60 > 0)  //count down for the last 5 seconds
+            else if(s60 <= 5 && s60 > 0)  //count down for the last 5 seconds
             {
                 speech.SpeakAsync(s60.ToString());
             }
-            //display the time count down
-            lblTimer.Text = string.Format("{0} : {1} : {2}", h.ToString().PadLeft(2, '0'), m.ToString().PadLeft(2, '0'), s.ToString().PadLeft(2, '0'));
-            lblMinCountDown.Text = s60.ToString();
 
             //All operations for this tick are completed.  Now move to next tick
             s++;
