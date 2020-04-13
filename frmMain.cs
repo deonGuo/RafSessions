@@ -15,6 +15,7 @@ namespace RafSessions
     public partial class frmMain : Form
     {
         SpeechSynthesizer speech;
+        //System.Media.SoundPlayer player;
         int h, m, s, s60, itemNumber;
         List<string> program;
         Random rnd;
@@ -23,22 +24,23 @@ namespace RafSessions
             [Description("Excellent. Keep it up")]
             everybody=0,
             [Description("Good work Lord Deon, you bubble ass look amazing")]
-            lordDeon=1, 
+            lordDeon=1,
             //[Description("Come on Deon, move your fat ass")]
             //fatDeon=2, 
-            [Description("Oi Hamish, move your fat hairy ass")]
-            lordHamish=2, 
-            [Description("Mr Hamish, did I tell you to stop?")]
+            //[Description("Oi Hamish, move your fat hairy ass")]
+            [Description("Lord Hamish, your big tities are so sexy")]
+            lordHamish =2, 
+            [Description("did I tell you to stop?")]
             fatHamish=3,
             [Description("Dont be a pussy!")]
             dontBeAPussy=4,
-            [Description("Don't stop you fat cow, you fat fat FAT cow")]
+            [Description("Don't stop you fat cow, you fatty fatty FAT cow")]
             fatCow=5,
-            [Description("I said Dont be a pussy!")]
+            [Description("This is why you are fat - because you don't take it seriously")]
             dontBeAPussy2 = 6,
-            [Description("Dont be a pussy!")]
+            [Description("Hard work now, hot hook ups later")]
             dontBeAPussy3 = 7,
-            [Description("Why are you so hot, lord Deon")]
+            [Description("Why are you so hot, my lord")]
             lordDeon2 = 8
         };
         public frmMain()
@@ -47,17 +49,17 @@ namespace RafSessions
             program = new List<string>{
                                 "Get Ready boys.  Starting in 1 minute from now",
                                 "Single Leg Box						",
-                                "1 and 1/2 Bottomed Out Squats   ",
+                                "1 and 1/2 Bottomed Out Squats      ",
                                 "Jump Squats                        ",
-                                "Handstand Pushups                  ",
+                                "Body Weight Push away              ",
                                 "Rotational Pushups                 ",
                                 "Cobra Pushups                      ",
                                 "Single Leg Heel Touch Squats       ",
                                 "Sprinter Lunges                    ",
                                 "Jump Sprinter Lunges               ",
-                                "Pullups OR Push ups                ",
+                                "Push ups                           ",
                                 "Body weight Sliding Pulldowns      ",
-                                "Inverted Chin Curls or Push ups    ",
+                                "Push ups                           ",
                                 "Reverse Corkscrews                 ",
                                 "Black Widow Knee Slides            ",
                                 "Levitation Crunches                ",
@@ -65,7 +67,8 @@ namespace RafSessions
               };
             //set the initial value of nextitem to be the first entry of the program
             this.speech = new SpeechSynthesizer();
-            speech.Volume = 200;
+            speech.Volume = 100;
+            //player = new System.Media.SoundPlayer(@"C:\Users\deong\source\repos\RafSessions\workoutMusic.mp3");
             speech.SelectVoice("Microsoft David Desktop");
             h = 0;
             m = 0;
@@ -112,6 +115,7 @@ namespace RafSessions
         private void button2_Click(object sender, EventArgs e)
         {
             timer1.Stop();
+            //player.Stop();
         }
 
 
@@ -154,7 +158,7 @@ namespace RafSessions
                 s60 = 60;
             }else if(s60==30){
                 int len = Enum.GetNames(typeof(encouragement)).Length; //this gets the length of the enum
-                int randomEncouragementNum = rnd.Next(len); //use the length of the enum to specify random number range
+                int randomEncouragementNum = rnd.Next(len); //use the length of the enum to specify random number range, int smaller than len
                 //retrieve the description of the enum value based on the random number
                 string randomEncouragement = this.GetEnumDescription((encouragement)randomEncouragementNum);
                 speech.SpeakAsync(randomEncouragement);
@@ -185,6 +189,7 @@ namespace RafSessions
         private void button1_Click(object sender, EventArgs e)
         {
             timer1.Start();
+            //player.PlayLooping();
             if (itemNumber == program.Count)
             { //when the itemNumber has reached the end of the program, i.e.: program has completed - now we want to restart the whole program again
                 itemNumber = 0;
