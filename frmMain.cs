@@ -23,14 +23,14 @@ namespace RafSessions
         {
             [Description("Excellent. Keep it up")]
             everybody=0,
-            [Description("Good work Lord Deon, you bubble ass look amazing")]
+            [Description("Lord Deon, you bubble ass looks amazing")]
             lordDeon=1,
             //[Description("Come on Deon, move your fat ass")]
             //fatDeon=2, 
             //[Description("Oi Hamish, move your fat hairy ass")]
-            [Description("Lord Hamish, your big tities are so sexy")]
+            [Description("Come on, work that fat ass")]
             lordHamish =2, 
-            [Description("did I tell you to stop?")]
+            [Description("Don't stop")]
             fatHamish=3,
             [Description("Dont be a pussy!")]
             dontBeAPussy=4,
@@ -38,9 +38,9 @@ namespace RafSessions
             fatCow=5,
             [Description("This is why you are fat - because you don't take it seriously")]
             dontBeAPussy2 = 6,
-            [Description("Hard work now, hot hook ups later")]
+            [Description("Hard work now, hot hook up later")]
             dontBeAPussy3 = 7,
-            [Description("Why are you so hot, my lord")]
+            [Description("You are doing great, my lord")]
             lordDeon2 = 8
         };
         public frmMain()
@@ -91,11 +91,13 @@ namespace RafSessions
                 txtDebug.Text += ("Name: " + info.Name + "\r\n");
             }
             txtDebug.Text += "Selected Voice: " + speech.Voice.Name;
+
+
         }
+  
 
-        //the code snippet below caters for dragging borderless form
-
-        public const int WM_NCLBUTTONDOWN = 0xA1;
+    //the code snippet below caters for dragging borderless form
+    public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
@@ -122,7 +124,6 @@ namespace RafSessions
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)

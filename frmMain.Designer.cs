@@ -68,7 +68,7 @@
             // txtProgram
             // 
             this.txtProgram.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
-            this.txtProgram.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtProgram.Font = new System.Drawing.Font("Century Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtProgram.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.txtProgram.Location = new System.Drawing.Point(47, 136);
             this.txtProgram.Multiline = true;
