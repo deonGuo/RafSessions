@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Speech.Synthesis;
+using System.Reflection;
 
 namespace RafSessions
 {
@@ -16,13 +17,37 @@ namespace RafSessions
         SpeechSynthesizer speech;
         int h, m, s, s60, itemNumber;
         List<string> program;
+        Random rnd;
+        enum encouragement
+        {
+            [Description("Excellent. Keep it up")]
+            everybody=0,
+            [Description("Good work Lord Deon, you bubble ass look amazing")]
+            lordDeon=1, 
+            //[Description("Come on Deon, move your fat ass")]
+            //fatDeon=2, 
+            [Description("Oi Hamish, move your fat hairy ass")]
+            lordHamish=2, 
+            [Description("Mr Hamish, did I tell you to stop?")]
+            fatHamish=3,
+            [Description("Dont be a pussy!")]
+            dontBeAPussy=4,
+            [Description("Don't stop you fat cow, you fat fat FAT cow")]
+            fatCow=5,
+            [Description("I said Dont be a pussy!")]
+            dontBeAPussy2 = 6,
+            [Description("Dont be a pussy!")]
+            dontBeAPussy3 = 7,
+            [Description("Why are you so hot, lord Deon")]
+            lordDeon2 = 8
+        };
         public frmMain()
         {
             InitializeComponent();
             program = new List<string>{
                                 "Get Ready boys.  Starting in 1 minute from now",
                                 "Single Leg Box						",
-                                "one and half Bottomed Out Squats   ",
+                                "1 and 1/2 Bottomed Out Squats   ",
                                 "Jump Squats                        ",
                                 "Handstand Pushups                  ",
                                 "Rotational Pushups                 ",
@@ -40,12 +65,14 @@ namespace RafSessions
               };
             //set the initial value of nextitem to be the first entry of the program
             this.speech = new SpeechSynthesizer();
+            speech.Volume = 200;
             speech.SelectVoice("Microsoft David Desktop");
             h = 0;
             m = 0;
             s = 0;
             s60 = 60;
             itemNumber = 0;
+            rnd = new Random();
             //set the program text box to display exercises
             foreach(string exercise in program)
             {
@@ -125,6 +152,12 @@ namespace RafSessions
                 txtCurrent.Text = program[itemNumber];
                 speech.SpeakAsync("NOW " + program[itemNumber]); //announces "NOW" instead of 0
                 s60 = 60;
+            }else if(s60==30){
+                int len = Enum.GetNames(typeof(encouragement)).Length; //this gets the length of the enum
+                int randomEncouragementNum = rnd.Next(len); //use the length of the enum to specify random number range
+                //retrieve the description of the enum value based on the random number
+                string randomEncouragement = this.GetEnumDescription((encouragement)randomEncouragementNum);
+                speech.SpeakAsync(randomEncouragement);
             }
             //every minute when it reaches 10, it reads out the next line
             else if(s60 == 10)
@@ -160,5 +193,21 @@ namespace RafSessions
             speech.SpeakAsync(program[itemNumber]);
            
         }
+
+        //help method for Enums
+        private string GetEnumDescription(Enum value)
+        {
+            FieldInfo fi = value.GetType().GetField(value.ToString());
+
+            DescriptionAttribute[] attributes = fi.GetCustomAttributes(typeof(DescriptionAttribute), false) as DescriptionAttribute[];
+
+            if (attributes != null && attributes.Any())
+            {
+                return attributes.First().Description;
+            }
+
+            return value.ToString();
+        }
+
     }
 }
