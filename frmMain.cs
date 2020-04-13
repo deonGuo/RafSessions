@@ -157,7 +157,7 @@ namespace RafSessions
                 txtCurrent.Text = program[itemNumber];
                 speech.SpeakAsync("NOW " + program[itemNumber]); //announces "NOW" instead of 0
                 s60 = 60;
-            }else if(s60==30){
+            }else if(s60==30 && m != 0){  //and since the 1st minute is prep only, don't give encouragement
                 int len = Enum.GetNames(typeof(encouragement)).Length; //this gets the length of the enum
                 int randomEncouragementNum = rnd.Next(len); //use the length of the enum to specify random number range, int smaller than len
                 //retrieve the description of the enum value based on the random number
