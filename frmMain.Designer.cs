@@ -111,7 +111,7 @@
             this.lblMinCountDown.Name = "lblMinCountDown";
             this.lblMinCountDown.Size = new System.Drawing.Size(1040, 776);
             this.lblMinCountDown.TabIndex = 6;
-            this.lblMinCountDown.Text = "60";
+            this.lblMinCountDown.Text = "00";
             // 
             // txtCurrent
             // 
