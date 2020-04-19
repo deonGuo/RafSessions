@@ -68,10 +68,10 @@ namespace RafSessions
             //  };
             rest = new Exercise("Rest", 20);
             program = new List<Exercise> {
-                new Exercise("Starting in 60 seconds.  Get ready now", 60),
-                new Exercise("Swing + Switch", 40),
+                new Exercise("Starting in 60 seconds.  Get ready now", 20),
+                new Exercise("Swing + Switch", 30),
                 rest,
-                new Exercise("Tick Tock Lunges Left", 40),
+                new Exercise("Tick Tock Lunges Left", 30),
                 rest,
                 new Exercise("Tick Tock Lunges Right", 40),
                 rest,
@@ -201,8 +201,9 @@ namespace RafSessions
                     speech.SpeakAsync("in 10 seconds: " + program[itemNumber+1].Name);
                 }
             }
-            else if(sCountDown <= 6 && sCountDown > 1)  //count down for the last 5 seconds
+            else if(sCountDown-1 <= 5 && sCountDown-1 > 0)  //count down for the last 5 seconds
             {
+                //speech.Rate = 2;
                 speech.SpeakAsync((sCountDown-1).ToString());
             }
 
