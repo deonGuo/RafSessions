@@ -47,78 +47,7 @@ namespace RafSessions
         public frmMain()
         {
             InitializeComponent();
-            //program = new List<string>{
-            //                    "Get Ready boys.  Starting in 1 minute from now",
-            //                    "Single Leg Box						",
-            //                    "1 and 1/2 Bottomed Out Squats      ",
-            //                    "Jump Squats                        ",
-            //                    "Body Weight Push away              ",
-            //                    "Rotational Pushups                 ",
-            //                    "Cobra Pushups                      ",
-            //                    "Single Leg Heel Touch Squats       ",
-            //                    "Sprinter Lunges                    ",
-            //                    "Jump Sprinter Lunges               ",
-            //                    "Push ups                           ",
-            //                    "Body weight Sliding Pulldowns      ",
-            //                    "Push ups                           ",
-            //                    "Reverse Corkscrews                 ",
-            //                    "Black Widow Knee Slides            ",
-            //                    "Levitation Crunches                ",
-            //                    "Angels and Devils                  "
-            //  };
-            rest = new Exercise("Rest", 20);
-            program = new List<Exercise> {
-                new Exercise("Starting in 60 seconds.  Get ready now", 20),
-                new Exercise("Swing + Switch", 30),
-                rest,
-                new Exercise("Tick Tock Lunges Left", 30),
-                rest,
-                new Exercise("Tick Tock Lunges Right", 40),
-                rest,
-                new Exercise("American Swing", 40),
-                rest,
-                new Exercise("Toe Taps", 40),
-                rest,
-                new Exercise("Squat + Press Left", 40),
-                rest,
-                new Exercise("Squat + Press Right", 40),
-                rest,
-                new Exercise("Plank Reach", 40),
-                rest,
-                new Exercise("Side Lunge Jack", 40),
-                rest,
-                new Exercise("Swing + Squat", 40)
-            };
-
-            //set the initial value of nextitem to be the first entry of the program
-            this.speech = new SpeechSynthesizer();
-            speech.Volume = 100;
-            //player = new System.Media.SoundPlayer(@"C:\Users\deong\source\repos\RafSessions\workoutMusic.mp3");
-            speech.SelectVoice("Microsoft David Desktop");
-            h = 0;
-            m = 0;
-            s = 0;
-            //s60 = 60;
-            sCountDown = 60;
-            itemNumber = 0;
-            rnd = new Random();
-            //set the program text box to display exercises
-            foreach(Exercise exercise in program)
-            {
-                txtProgram.Text += exercise.Name.Trim() + "\r\n";
-            }
-            //set the labels
-            txtCurrent.Text = "My awesome exercise routine";
-            //show installed voices
-            txtDebug.Text = "Intalled voices: " + speech.GetInstalledVoices().Count + "\r\n";
-            foreach (InstalledVoice voice in speech.GetInstalledVoices())
-            {
-                VoiceInfo info = voice.VoiceInfo;
-                txtDebug.Text += ("Name: " + info.Name + "\r\n");
-            }
-            txtDebug.Text += "Selected Voice: " + speech.Voice.Name;
-
-
+            lstRoutine.SelectedIndex = 0;
         }
   
 
@@ -150,9 +79,48 @@ namespace RafSessions
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            //form load is triggered by initial loading and selecting another routine
+            //when a new routine is selected, we need to reset all fields 
+
+            //clear existing workout routine
+            txtProgram.Clear();
+            //now we can get the preset routine
+            string selectedRoutine = lstRoutine.SelectedItem.ToString().Trim().ToUpper();
+            if (selectedRoutine.Contains("FULL BODY"))
+                program = Routines.FullBodyWorkout();
+            else if(selectedRoutine.Contains("PUSH UP"))
+                program = Routines.ChestWorkout();
+
+            //set the initial value of nextitem to be the first entry of the program
+            this.speech = new SpeechSynthesizer();
+            speech.Volume = 100;
+            //player = new System.Media.SoundPlayer(@"C:\Users\deong\source\repos\RafSessions\workoutMusic.mp3");
+            speech.SelectVoice("Microsoft David Desktop");
+            h = 0;
+            m = 0;
+            s = 0;
+            //s60 = 60;
+            sCountDown = 60;
+            itemNumber = 0;
+            rnd = new Random();
+            //set the program text box to display exercises
+            foreach (Exercise exercise in program)
+            {
+                txtProgram.Text += exercise.Name.Trim() + "\r\n";
+            }
+            //set the labels
+            txtCurrent.Text = "My awesome exercise routine";
+            //show installed voices
+            //txtDebug.Text = "Intalled voices: " + speech.GetInstalledVoices().Count + "\r\n";
+            //foreach (InstalledVoice voice in speech.GetInstalledVoices())
+            //{
+            //    VoiceInfo info = voice.VoiceInfo;
+            //    txtDebug.Text += ("Name: " + info.Name + "\r\n");
+            //}
+            //txtDebug.Text += "Selected Voice: " + speech.Voice.Name;
+
             //when the form loads, initiate the initial countdown timer as the first exercise duration
             sCountDown = program[0].Duration;
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)

@@ -37,6 +37,7 @@
             this.txtDebug = new System.Windows.Forms.TextBox();
             this.lblMinCountDown = new System.Windows.Forms.Label();
             this.txtCurrent = new System.Windows.Forms.RichTextBox();
+            this.lstRoutine = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // button1
@@ -89,7 +90,7 @@
             this.lblTimer.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblTimer.Location = new System.Drawing.Point(642, 248);
             this.lblTimer.Name = "lblTimer";
-            this.lblTimer.Size = new System.Drawing.Size(279, 78);
+            this.lblTimer.Size = new System.Drawing.Size(96, 25);
             this.lblTimer.TabIndex = 4;
             this.lblTimer.Text = "00:00:00";
             // 
@@ -109,7 +110,7 @@
             this.lblMinCountDown.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblMinCountDown.Location = new System.Drawing.Point(518, 13);
             this.lblMinCountDown.Name = "lblMinCountDown";
-            this.lblMinCountDown.Size = new System.Drawing.Size(1040, 776);
+            this.lblMinCountDown.Size = new System.Drawing.Size(349, 260);
             this.lblMinCountDown.TabIndex = 6;
             this.lblMinCountDown.Text = "00";
             // 
@@ -122,13 +123,30 @@
             this.txtCurrent.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtCurrent.Font = new System.Drawing.Font("Century Gothic", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCurrent.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.txtCurrent.Location = new System.Drawing.Point(65, 41);
+            this.txtCurrent.Location = new System.Drawing.Point(70, 61);
             this.txtCurrent.Name = "txtCurrent";
             this.txtCurrent.ReadOnly = true;
             this.txtCurrent.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.txtCurrent.Size = new System.Drawing.Size(400, 89);
+            this.txtCurrent.Size = new System.Drawing.Size(400, 69);
             this.txtCurrent.TabIndex = 7;
             this.txtCurrent.Text = "Get Ready Boys";
+            // 
+            // lstRoutine
+            // 
+            this.lstRoutine.AllowDrop = true;
+            this.lstRoutine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
+            this.lstRoutine.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lstRoutine.ForeColor = System.Drawing.Color.White;
+            this.lstRoutine.FormattingEnabled = true;
+            this.lstRoutine.ItemHeight = 21;
+            this.lstRoutine.Items.AddRange(new object[] {
+            "Full body",
+            "Push ups (Chest)"});
+            this.lstRoutine.Location = new System.Drawing.Point(70, 23);
+            this.lstRoutine.Name = "lstRoutine";
+            this.lstRoutine.Size = new System.Drawing.Size(259, 21);
+            this.lstRoutine.TabIndex = 8;
+            this.lstRoutine.SelectedIndexChanged += new System.EventHandler(this.frmMain_Load);
             // 
             // frmMain
             // 
@@ -136,6 +154,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(51)))));
             this.ClientSize = new System.Drawing.Size(867, 522);
+            this.Controls.Add(this.lstRoutine);
             this.Controls.Add(this.txtCurrent);
             this.Controls.Add(this.txtProgram);
             this.Controls.Add(this.txtDebug);
@@ -165,6 +184,7 @@
         private System.Windows.Forms.TextBox txtDebug;
         private System.Windows.Forms.Label lblMinCountDown;
         private System.Windows.Forms.RichTextBox txtCurrent;
+        private System.Windows.Forms.ListBox lstRoutine;
     }
 }
 
